@@ -22,8 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SimplePi\\": "src/",
-            "App\\": "app/"
+            "SimplePi\\": "src/"
         },
         "files": [
             "src/helpers.php"
