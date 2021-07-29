@@ -5,9 +5,13 @@
  */
 if(!function_exists('env')) {
     function env($var,$default='') {
-        $dotenv = Dotenv\Dotenv::createImmutable(app_path('/../'));
-        $dotenv->load();
-        return isset($_ENV[$var])?$_ENV[$var]:$default;
+        try {
+            $dotenv = Dotenv\Dotenv::createImmutable(base_path());
+            $dotenv->load();
+            return isset($_ENV[$var])?$_ENV[$var]:$default;    
+        } catch(Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 }
 /**
@@ -50,6 +54,14 @@ if(!function_exists('config')) {
 if(!function_exists('app_path')) {
     function app_path($var = '') { 
         return filter_input(INPUT_SERVER,'DOCUMENT_ROOT').'/../app/'.$var;
+    }
+}
+/**
+ * App folder path helper
+ */
+if(!function_exists('base_path')) {
+    function base_path($var = '') { 
+        return filter_input(INPUT_SERVER,'DOCUMENT_ROOT').'//../'.$var;
     }
 }
 /**
