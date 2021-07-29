@@ -5,7 +5,7 @@
  */
 if(!function_exists('env')) {
     function env($var,$default='') {
-        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+        $dotenv = Dotenv\Dotenv::createImmutable(app_path('/../'));
         $dotenv->load();
         return isset($_ENV[$var])?$_ENV[$var]:$default;
     }
