@@ -10,7 +10,7 @@
             "role": "Lead developer"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">7.0",
         "filp/whoops": "~2.1",
