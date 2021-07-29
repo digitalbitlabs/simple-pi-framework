@@ -61,4 +61,4 @@ That's it. You get an array of your database table.
 
 
 ## Credits
-This framework is developed by [Sanket Raut](https://twitter.com/sanketmraut) as a hobby project at [Digitalbit Labs](https://digitalbit.in) to write a bare metal framework that can kept as simple as possible.
+This framework is developed by [Sanket Raut](https://twitter.com/sanketmraut) as a hobby project at [Digitalbit Labs](https://digitalbit.in) to write a bare metal framework that can be kept as simple as possible.
