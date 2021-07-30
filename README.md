@@ -1,6 +1,8 @@
-# Simple Pi
+<p align="center"><img src="https://user-images.githubusercontent.com/72734777/127652853-7592fc23-95d0-4dc7-9a07-ddeeaf85f3d9.png"/></p>
+
 > This repository contains the source code of Simple Pi framework. To create a project or app using the framework visit [https://github.com/digitalbitlabs/simple-pi](https://github.com/digitalbitlabs/simple-pi) 
- 
+
+# Simple Pi 
 Simple Pi is a REST API micro framework developed in PHP. The sole purpose of this framework is give you ready to use simple API which allows you to have custom configuration, routes and database operations. To begin with using the framework, follow the steps given below:
 
 
