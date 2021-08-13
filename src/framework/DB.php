@@ -20,7 +20,7 @@
         $db = new self;
         try {
             foreach($db->connection->query($query) as $row) {
-                $db->results[] = $row;
+                $db->results[] = array_unique($row);
             }
         } catch (PDOException $e) {
             abort("DB Error: " . $e->getMessage());
