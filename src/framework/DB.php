@@ -19,6 +19,7 @@
         // write orm query builder function
         $db = new self;
         try {
+            $db->connection = $db->connection == null?self::$app:$db->connection;
             foreach($db->connection->query($query) as $row) {
                 $db->results[] = array_unique($row);
             }
