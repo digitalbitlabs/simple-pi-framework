@@ -20,8 +20,8 @@
         $db = new self;
         try {
             $db->connection = $db->connection == null?self::$app:$db->connection;
-            foreach($db->connection->query($query) as $row) {
-                $db->results[] = array_unique($row);
+            foreach($db->connection->query($query, \PDO::FETCH_ASSOC) as $row) {
+                $db->results[] = $row;
             }
         } catch (PDOException $e) {
             abort("DB Error: " . $e->getMessage());
