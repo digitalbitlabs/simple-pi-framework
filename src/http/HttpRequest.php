@@ -43,6 +43,9 @@ class HttpRequest {
      */
     public function all() {
         if($this->method() == 'POST') {
+            if(!empty(filter_input(INPUT_SERVER,'HTTP_AJAX_USER_AGENT')) && strtolower(filter_input(INPUT_SERVER,'HTTP_AJAX_USER_AGENT')) == 'simplepi/framework') {
+                return json_decode(file_get_contents('php://input', true));
+            }
             return $this->inputs->all();
         }
         return $this->collection->all();
