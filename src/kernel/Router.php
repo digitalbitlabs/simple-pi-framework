@@ -191,9 +191,6 @@ class Router {
      * GET routes
      */
     public function get($route, $routecallback) {
-        if(!empty(filter_input(INPUT_SERVER,'HTTP_AJAX_USER_AGENT')) && strtolower(filter_input(INPUT_SERVER,'HTTP_AJAX_USER_AGENT')) == 'simplepi/framework') {
-            $this->__renderResponse('OPTIONS',$route,$routecallback);
-        }
         $this->__renderResponse('GET',$route,$routecallback);
     }
 
@@ -201,9 +198,7 @@ class Router {
      * POST routes
      */
     public function post($route, $routecallback) {
-        if(!empty(filter_input(INPUT_SERVER,'HTTP_AJAX_USER_AGENT')) && strtolower(filter_input(INPUT_SERVER,'HTTP_AJAX_USER_AGENT')) == 'simplepi/framework') {
-            $this->__renderResponse('OPTIONS',$route,$routecallback);
-        }
+        $this->__renderResponse('OPTIONS',$route,$routecallback);
         $this->__renderResponse('POST',$route,$routecallback);
     }
 
@@ -211,9 +206,6 @@ class Router {
      * PUT routes
      */
     public function put($route, $routecallback) {
-        if(!empty(filter_input(INPUT_SERVER,'HTTP_AJAX_USER_AGENT')) && strtolower(filter_input(INPUT_SERVER,'HTTP_AJAX_USER_AGENT')) == 'simplepi/framework') {
-            $this->__renderResponse('OPTIONS',$route,$routecallback);
-        }
         $this->__renderResponse('PUT',$route,$routecallback);
     }
 
