@@ -37,4 +37,13 @@
             abort("DB Error: " . $e->getMessage());
         } 
     }
+
+    public function first() {
+        try {
+            $this->connection = null;
+            return isset($this->results[0])?$this->results:[];    
+        } catch(Exception $e) {
+            abort("DB Error: " . $e->getMessage());
+        } 
+    }
  }
