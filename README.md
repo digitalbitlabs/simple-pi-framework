@@ -51,13 +51,16 @@ Simple Pi uses PHP PDO objects to run database queries. Following drivers are su
 * PostgreSQL (PDO)
 * SQLite (PDO) 
 
-To perform a query simply add the lines at the top of your controller or routes.php file
+To perform a query to select data simply add the lines at the top of your controller or routes.php file
 
 `use SimplePi\Framework\DB;`
 
 Then run the query and fetch results using DB::query()->result() function.
 
 `DB::query("SELECT * FROM foo")->result();`
+
+To perform additional operations like delete or update or insert, use the respective functions from `src\framework\DB` class. The functions are similar to Laravel eloquent. You can refer to Laravel eloquent for more details.
+
 
 That's it. You get an array of your database table.
 
