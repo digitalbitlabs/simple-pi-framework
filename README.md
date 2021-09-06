@@ -59,7 +59,7 @@ Then run the query and fetch results using DB::query()->result() function.
 
 `DB::query("SELECT * FROM foo")->result();`
 
-To perform additional operations like delete or update or insert, use the respective functions from `src\framework\DB` class. The functions are similar to Laravel eloquent. You can refer to Laravel eloquent for more details.
+To perform additional operations like delete or update or insert, use the respective functions from `src\framework\DB` class. The functions can be executed in a similar fashion as Laravel eloquent. You can refer to Laravel eloquent documentation for more details.
 
 
 That's it. You get an array of your database table.
