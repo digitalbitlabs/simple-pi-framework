@@ -16,6 +16,7 @@ class Router {
      * Common variables
      */
     protected $request;
+    protected $requestMethod;
     protected $response;
     protected $collection = [];
     protected $routecollection = [];
@@ -119,6 +120,7 @@ class Router {
      */
     private function __setupDispatch() {
         $this->payload = $this->router->dispatch($this->request->method(),$this->request->path());
+        $this->requestMethod = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 
         // error handler to throw errors
         switch ($this->payload[0]) {            
@@ -129,6 +131,9 @@ class Router {
                 response()->json(['message'=>'405 - '.$this->statusTexts[405]],405);
                 break;
             case FastRoute\Dispatcher::FOUND:
+                if($this->requestMethod === 'OPTIONS') {
+                    return true;
+                }
                 $this->routehandler = $this->payload[1];
                 $this->routevars = $this->payload[2];
                 if(is_object($this->routehandler)) {
