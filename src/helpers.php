@@ -53,15 +53,17 @@ if(!function_exists('config')) {
  */
 if(!function_exists('app_path')) {
     function app_path($var = '') { 
-        return filter_input(INPUT_SERVER,'DOCUMENT_ROOT').'/../app/'.$var;
+        $vendorPath = 'vendor'.DIRECTORY_SEPARATOR.'digitalbitlabs'.DIRECTORY_SEPARATOR.'simple-pi-framework'.DIRECTORY_SEPARATOR.'src';
+        return str_replace($vendorPath,'',dirname(__FILE__)).'/app/'.$var;
     }
 }
 /**
  * App folder path helper
  */
 if(!function_exists('base_path')) {
-    function base_path($var = '') { 
-        return filter_input(INPUT_SERVER,'DOCUMENT_ROOT').'//../'.$var;
+    function base_path($var = '') {
+        $vendorPath = 'vendor'.DIRECTORY_SEPARATOR.'digitalbitlabs'.DIRECTORY_SEPARATOR.'simple-pi-framework'.DIRECTORY_SEPARATOR.'src';
+        return str_replace($vendorPath,'',dirname(__FILE__)).$var;
     }
 }
 /**
