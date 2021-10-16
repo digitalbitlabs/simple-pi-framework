@@ -27,7 +27,7 @@ class Router {
     protected $routecallback;
     protected $routehandler;
     protected $routevars;
-    protected $routebag;
+    protected $routebag = [];
     protected $namespace = '\\App\\Controllers\\';
     protected $statusTexts = [
         100 => 'Continue',
