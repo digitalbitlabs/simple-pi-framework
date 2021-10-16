@@ -167,6 +167,11 @@ class Router {
      * Render the response based on the method and args
      */
     private function __renderResponse($method,$route,$routecallback) {
+        // Preflight requests for every route
+        if(!in_array($route,$this->routebag)) {
+            array_push($this->routebag,$route);
+            $this->__renderResponse('OPTIONS',$route,$routecallback);
+        }
         if(gettype($routecallback) == 'string') {
             $this->routecallback = explode('@',$routecallback);
             if(count($this->routecallback) > 1) {
@@ -203,7 +208,6 @@ class Router {
      * POST routes
      */
     public function post($route, $routecallback) {
-        $this->__renderResponse('OPTIONS',$route,$routecallback);
         $this->__renderResponse('POST',$route,$routecallback);
     }
 
