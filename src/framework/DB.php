@@ -93,8 +93,32 @@
             array_walk($keyPairs,function(&$val,$key) {
                 $val = ':'.$key;
             });
-            $this->query = "INSERT INTO ".$this->table." (".implode(',',array_keys($keyPairs)).") VALUES(".implode(',',array_values($keyPairs)).") ";
+            $keys = array_map(function($val) {
+                return '`'.$val.'`';
+            },array_keys($keyPairs));
+            $values = array_values($keyPairs);
+            $this->query = "INSERT INTO ".$this->table." (".implode(',',$keys).") VALUES(".implode(',',$values).") ";
             $this->connection->prepare($this->query)->execute($data);
+        } catch (PDOException $e) {
+            abort("DB Error: " . $e->getMessage());
+        }
+        return $this;
+    }
+
+    public function insertGetId($data) {
+        try {
+            $data = (array) $data;
+            $keyPairs = $data;
+            array_walk($keyPairs,function(&$val,$key) {
+                $val = ':'.$key;
+            });
+            $keys = array_map(function($val) {
+                return '`'.$val.'`';
+            },array_keys($keyPairs));
+            $values = array_values($keyPairs);
+            $this->query = "INSERT INTO ".$this->table." (".implode(',',$keys).") VALUES(".implode(',',$values).") ";
+            $this->connection->prepare($this->query)->execute($data);
+            return $this->connection->lastInsertId();
         } catch (PDOException $e) {
             abort("DB Error: " . $e->getMessage());
         }
