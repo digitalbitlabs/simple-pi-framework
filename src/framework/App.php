@@ -38,6 +38,9 @@
         $config = self::config();
         if(is_array($config)) {
             $pdo = $config['database'];
+            if(isset($pdo['charset'])) {     
+                return self::$app = new \PDO($pdo['driver'].':host='.$pdo['host'].';dbname='.$pdo['database'].';charset='.$pdo['charset'], $pdo['username'], $pdo['password'],array(\PDO::ATTR_PERSISTENT => true));    
+            }
             return self::$app = new \PDO($pdo['driver'].':host='.$pdo['host'].';dbname='.$pdo['database'], $pdo['username'], $pdo['password'],array(\PDO::ATTR_PERSISTENT => true));    
         }
     }
