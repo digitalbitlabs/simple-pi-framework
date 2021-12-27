@@ -19,6 +19,7 @@
     protected $valueSet;
     protected $valueIn;
     protected $valueNotIn;
+    protected $statement;
     protected $results = [];
 
     public function __construct() {
@@ -63,6 +64,18 @@
         } catch(PDOException $e) {
             abort("DB Error: " . $e->getMessage());
         }
+    }
+
+    public function whereIn($field,$collection) {
+        $this->fieldIn = $field;
+        $this->valueIn = $collection;
+        return $this;
+    }
+
+    public function whereNotIn($field,$collection) {
+        $this->fieldNotIn = $field;
+        $this->valueNotIn = $collection;
+        return $this;
     }
 
     public function update($data) {
@@ -148,16 +161,30 @@
         return $this;
     }
 
-    public function whereIn($field,$collection) {
-        $this->fieldIn = $field;
-        $this->valueIn = $collection;
-        return $this;
-    }
-
-    public function whereNotIn($field,$collection) {
-        $this->fieldNotIn = $field;
-        $this->valueNotIn = $collection;
-        return $this;
+    public function get() {
+        try {
+            // fetch results and then display
+            $this->query = "SELECT * FROM ".$this->table." WHERE 1 = 1";
+            $this->valueSet = [];
+            if(isset($this->field) && isset($this->value)) {
+                $this->query .= " AND ".$this->field."= ?";
+                $this->valueSet = array_merge($this->valueSet,[$this->value]);
+            }
+            if(isset($this->fieldIn) && isset($this->valueIn)) {
+                $this->query .= " AND ".$this->fieldIn." IN (".str_repeat("?,", count($this->valueIn)-1) . "?".")";
+                $this->valueSet = array_merge($this->valueSet,$this->valueIn);
+            }
+            if(isset($this->fieldNotIn) && isset($this->valueNotIn)) {
+                $this->query .= " AND ".$this->fieldNotIn." NOT IN (".str_repeat("?,", count($this->valueNotIn)-1) . "?".")";
+                $this->valueSet = array_merge($this->valueSet,$this->valueNotIn);
+            }
+            $this->statement = $this->connection->prepare($this->query);
+            $this->statement->execute($this->valueSet);
+            $this->statement->setFetchMode(\PDO::FETCH_ASSOC);
+            return $this->results = $this->statement->fetchAll();
+        } catch(Exception $e) {
+            abort("DB Error: " .$e->getMessage());
+        }
     }
 
     public function first() {
