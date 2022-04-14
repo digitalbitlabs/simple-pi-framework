@@ -51,11 +51,11 @@ To perform a query to select data simply add the lines at the top of your contro
 
 `use SimplePi\Framework\DB;`
 
-Then to fetch the records from any table simply use the ORM functions provided by Laravel. Visit https://laravel.com/docs/9.x/database for more information.
+Then to fetch the records from any table simply use the ORM functions provided by Laravel. Visit https://laravel.com/docs/9.x/database for more information. For example the query `SELECT * FROM demo` can be run in the following manner in Simple Pi,
 
 `DB::table('demo')->get()->toArray();`
 
-That's it. You get an array of your database table.
+That's it. You get an array of data in your database table.
 
 >*To perform additional operations like delete or update or insert, use the respective functions from `CapsuleManager` class. The functions can be executed in a similar fashion as Laravel eloquent. You can refer to Laravel eloquent documentation for more details.*
 
