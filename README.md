@@ -37,31 +37,27 @@ Controllers are custom classes to group similar operations together. They can be
 
 
 ## Database operations
-Simple Pi uses PHP PDO objects to run database queries. Following drivers are supported as per the php.net documentation.
+Simple Pi uses Capsule Manager by Laravel for carrying out database operations. For more information visit https://laravel.com/api/8.x/Illuminate/Database/Capsule/Manager.html.
 
-* CUBRID (PDO)
-* MS SQL Server (PDO)
-* Firebird (PDO)
-* IBM (PDO)
-* Informix (PDO)
-* MySQL (PDO)
-* MS SQL Server (PDO)
-* Oracle (PDO)
-* ODBC and DB2 (PDO)
-* PostgreSQL (PDO)
-* SQLite (PDO) 
+As per the official documentation from Laravel following drivers are supported by Capsule Manager.
+
+* MariaDB 10.2+ 
+* MySQL 5.7+
+* PostgreSQL 10.0+
+* SQLite 3.8.8+
+* SQL Server 2017+
 
 To perform a query to select data simply add the lines at the top of your controller or routes.php file
 
 `use SimplePi\Framework\DB;`
 
-Then run the query and fetch results using DB::query()->result() function.
+Then to fetch the records from any table simply use the ORM functions provided by Laravel. Visit https://laravel.com/docs/9.x/database for more information.
 
-`DB::query("SELECT * FROM foo")->result();`
+`DB::table('demo')->get()->toArray();`
 
 That's it. You get an array of your database table.
 
->*To perform additional operations like delete or update or insert, use the respective functions from `src\framework\DB` class. The functions can be executed in a similar fashion as Laravel eloquent. You can refer to Laravel eloquent documentation for more details.*
+>*To perform additional operations like delete or update or insert, use the respective functions from `CapsuleManager` class. The functions can be executed in a similar fashion as Laravel eloquent. You can refer to Laravel eloquent documentation for more details.*
 
 
 ## Credits
