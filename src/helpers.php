@@ -1,19 +1,5 @@
 <?php declare(strict_types = 1);
-/** @author: Sanket Raut **
-
- * Environment variable helper
- */
-if(!function_exists('env')) {
-    function env($var,$default='') {
-        try {
-            $dotenv = Dotenv\Dotenv::createImmutable(base_path());
-            $dotenv->load();
-            return isset($_ENV[$var])?$_ENV[$var]:$default;    
-        } catch(Exception $e) {
-            throw new Exception($e->getMessage());
-        }
-    }
-}
+/** @author: Sanket Raut **/
 /**
  * Debug helper
  */
@@ -74,4 +60,32 @@ if(!function_exists('abort')) {
         throw new RuntimeException($message);
     }
 }
-
+/**
+ * Load env vars by calling env function function from Illuminate\Support\helpers.php 
+ */
+if(!function_exists('load_env_vars')) {
+    function load_env_vars() {
+        $dotenv = Dotenv\Dotenv::createImmutable(base_path());
+        $dotenv->load();
+        foreach($_ENV as $var => $val) {
+            env($var);
+        }
+    }
+}
+/*
+* Environment variable helper
+*/
+if(!function_exists('env')) {
+   function env($var,$default = null) {
+       try {
+           $dotenv = Dotenv\Dotenv::createImmutable(base_path());
+           $dotenv->load();
+           return isset($_ENV[$var])?$_ENV[$var]:$default;    
+       } catch(Exception $e) {
+           throw new Exception($e->getMessage());
+       }
+   }
+} else {
+   // call default env function by loading env variables
+   load_env_vars();
+}
